@@ -1,0 +1,84 @@
+##############################################
+# Laravel
+##############################################
+/vendor/
+/node_modules/
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Laravel generated / cache
+/bootstrap/cache/*.php
+!bootstrap/cache/.gitkeep
+/storage/*.key
+/storage/app/public/
+/storage/framework/cache/
+/storage/framework/sessions/
+/storage/framework/testing/
+/storage/framework/views/
+/storage/logs/
+/storage/pail/
+
+# Auth / secrets
+/auth.json
+
+# Testing
+/.phpunit.cache/
+.phpunit.result.cache
+coverage/
+
+##############################################
+# React / Vite / Node
+##############################################
+/public/build/
+/public/hot/
+/public/storage/
+
+# npm debug logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Optional npm cache
+.npm/
+.yarn/
+
+##############################################
+# IDE & Editors
+##############################################
+/.idea/
+/.vscode/
+/.zed/
+/.nova/
+/.cursor/
+/.codex/
+*.code-workspace
+.phpactor.json
+_ide_helper.php
+_ide_helper_models.php
+.phpstorm.meta.php
+
+##############################################
+# OS
+##############################################
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+##############################################
+# Logs & temp
+##############################################
+*.log
+*.tmp
+*.swp
+*.swo
+*.bak
+
+##############################################
+# Homestead / Vagrant (legacy)
+##############################################
+Homestead.json
+Homestead.yaml
+.vagrant/
