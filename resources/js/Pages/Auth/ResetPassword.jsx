@@ -3,14 +3,19 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Head, useForm, usePage } from '@inertiajs/react';
 
 export default function ResetPassword({ token, email }) {
+    const { honeypot } = usePage().props;
     const { data, setData, post, processing, errors, reset } = useForm({
         token: token,
         email: email,
         password: '',
         password_confirmation: '',
+        ...(honeypot.enabled ? {
+            [honeypot.nameFieldName]: '',
+            [honeypot.validFromFieldName]: honeypot.encryptedValidFrom,
+        } : {}),
     });
 
     const submit = (e) => {
@@ -26,6 +31,22 @@ export default function ResetPassword({ token, email }) {
             <Head title="Reset Password" />
 
             <form onSubmit={submit}>
+                {honeypot.enabled && (
+                    <div style={{ display: 'none' }}>
+                        <input
+                            type="text"
+                            name={honeypot.nameFieldName}
+                            value={data[honeypot.nameFieldName]}
+                            onChange={(e) => setData(honeypot.nameFieldName, e.target.value)}
+                        />
+                        <input
+                            type="text"
+                            name={honeypot.validFromFieldName}
+                            value={data[honeypot.validFromFieldName]}
+                            readOnly
+                        />
+                    </div>
+                )}
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 

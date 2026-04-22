@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Role;
@@ -37,6 +38,8 @@ class UserController extends Controller
         $user = User::create($validated);
         $user->assignRole('User');
 
+        Cache::forget('users_dropdown');
+
         return redirect()->back();
     }
 
@@ -51,12 +54,17 @@ class UserController extends Controller
         $user->update($validated);
         $user->syncRoles([$request->role]);
 
+        Cache::forget('users_dropdown');
+
         return redirect()->back();
     }
 
     public function destroy(User $user)
     {
         $user->delete();
+
+        Cache::forget('users_dropdown');
+
         return redirect()->back();
     }
 }

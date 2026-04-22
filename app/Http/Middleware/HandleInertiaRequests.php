@@ -36,6 +36,12 @@ class HandleInertiaRequests extends Middleware
                     'roles' => $request->user()->roles->pluck('name'),
                 ]) : null,
             ],
+            'honeypot' => [
+                'nameFieldName' => config('honeypot.name_field_name'),
+                'validFromFieldName' => config('honeypot.valid_from_field_name'),
+                'encryptedValidFrom' => \Spatie\Honeypot\Facades\Honeypot::encryptedValidFrom(),
+                'enabled' => config('honeypot.enabled'),
+            ],
         ];
     }
 }
